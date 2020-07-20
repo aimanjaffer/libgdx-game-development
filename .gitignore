@@ -1,0 +1,17 @@
+*.apk
+*.bat
+*.jar
+*.class
+
+# IntelliJ
+*.iml
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/assetWizardSettings.xml
+.idea/dictionaries
+.idea/libraries
+
+core/build/
+desktop/build/
+
