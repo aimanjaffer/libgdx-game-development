@@ -20,7 +20,7 @@
 core/build/
 desktop/build/
 
-
+.gradle/
 .gradle/5.4.1/executionHistory/executionHistory.bin
 .gradle/5.4.1/executionHistory/executionHistory.lock
 .gradle/5.4.1/fileChanges/last-build.bin
