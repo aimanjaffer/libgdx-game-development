@@ -11,7 +11,30 @@
 .idea/assetWizardSettings.xml
 .idea/dictionaries
 .idea/libraries
+.idea/.gitignore
+.idea/compiler.xml
+.idea/jarRepositories.xml
+.idea/misc.xml
+.idea/vcs.xml
 
 core/build/
 desktop/build/
+
+
+.gradle/5.4.1/executionHistory/executionHistory.bin
+.gradle/5.4.1/executionHistory/executionHistory.lock
+.gradle/5.4.1/fileChanges/last-build.bin
+.gradle/5.4.1/fileContent/fileContent.lock
+.gradle/5.4.1/fileHashes/fileHashes.bin
+.gradle/5.4.1/fileHashes/fileHashes.lock
+.gradle/5.4.1/fileHashes/resourceHashesCache.bin
+.gradle/5.4.1/gc.properties
+.gradle/5.4.1/javaCompile/classAnalysis.bin
+.gradle/5.4.1/javaCompile/jarAnalysis.bin
+.gradle/5.4.1/javaCompile/javaCompile.lock
+.gradle/5.4.1/javaCompile/taskHistory.bin
+.gradle/buildOutputCleanup/buildOutputCleanup.lock
+.gradle/buildOutputCleanup/cache.properties
+.gradle/buildOutputCleanup/outputFiles.bin
+.gradle/vcs-1/gc.properties
 
