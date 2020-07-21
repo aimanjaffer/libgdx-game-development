@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -15,55 +16,45 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import java.util.Random;
 
 public class AvatarGame extends ApplicationAdapter {
-    //private static final float DOT_RADIUS = 3.0f;
-    //private SpriteBatch spriteBatch;
-    //private BitmapFont bitmapFont;
-    //private final Array<Vector2> dots = Dots.dots();
-    //private float[] floatDots;
-    private ShapeRenderer shapeRenderer;
 
+    // Declare
+    ShapeRenderer renderer;
 
     @Override
-    public void create () {
-		/*
-		spriteBatch = new SpriteBatch();
-		bitmapFont = new BitmapFont();
-		 */
-
-        shapeRenderer = new ShapeRenderer();
+    public void create() {
+        // Initialize
+        renderer = new ShapeRenderer();
     }
 
     @Override
-    public void render () {
-        // Make the background black
+    public void dispose() {
+        // Dispose
+        renderer.dispose();
+    }
+
+    @Override
+    public void render() {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-/*
-		// Draw the dots
-		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-		for (Vector2 dot : dots){
-			shapeRenderer.circle(dot.x, dot.y, DOT_RADIUS);
-		}
-		shapeRenderer.end();
 
-		// Draw the numbers
-		spriteBatch.begin();
-		Integer i = 1;
-		for (Vector2 dot : dots){
-			bitmapFont.draw(spriteBatch,i.toString(),dot.x+DOT_RADIUS, dot.y-DOT_RADIUS);
-			i++;
-		}
-		spriteBatch.end();
-*/
+        renderer.begin(ShapeType.Filled);
 
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        // Head
+        renderer.circle(100, 100, 10);
+        renderer.end();
 
-        shapeRenderer.setColor(Color.WHITE);
-        shapeRenderer.rect(10,20,500,500,Color.BLUE,Color.RED,Color.YELLOW,Color.GREEN);
-        shapeRenderer.rectLine(20,30,40,50,10);
-        // Two overlapping objects. The one drawn later is placed on top of the ones drawn earlier
-        shapeRenderer.setColor(Color.GOLD);
-        shapeRenderer.circle(100,200,60);
-        shapeRenderer.end();
+        renderer.begin(ShapeType.Line);
+
+        // Torso
+        renderer.line(100, 50, 100, 100);
+
+        // Legs
+        renderer.line(85, 35, 100, 50);
+        renderer.line(115, 35, 100, 50);
+
+        // Arms
+        renderer.line(85, 70, 100, 85);
+        renderer.line(115, 70, 100, 85);
+        renderer.end();
     }
 }
