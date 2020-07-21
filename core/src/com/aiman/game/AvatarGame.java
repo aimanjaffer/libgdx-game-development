@@ -15,39 +15,22 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import java.util.Random;
 
 public class AvatarGame extends ApplicationAdapter {
-	private static final float DOT_RADIUS = 3.0f;
-	private SpriteBatch spriteBatch;
-	private BitmapFont bitmapFont;
-	private final Array<Vector2> dots = Dots.dots();
-	private float[] floatDots;
+	//private static final float DOT_RADIUS = 3.0f;
+	//private SpriteBatch spriteBatch;
+	//private BitmapFont bitmapFont;
+	//private final Array<Vector2> dots = Dots.dots();
+	//private float[] floatDots;
 	private ShapeRenderer shapeRenderer;
 
 
 	@Override
 	public void create () {
+		/*
 		spriteBatch = new SpriteBatch();
 		bitmapFont = new BitmapFont();
-		floatDots = vector2ArrayToFloatArray(dots);
-		shapeRenderer = new ShapeRenderer();
-	}
+		 */
 
-	/**
-	 * TODO: Complete this function to translate Array<Vector2> to float[]
-	 *
-	 * The first problem is that the dot positions we have to work with are in an array of vectors,
-	 * and polyLine wants a flat array of floats. We've set up the array of floats for you, now all
-	 * you need to do is iterate over the Array of vectors, and put the x and y components into the
-	 * float array. Remember to check out the solution directory if you need help. This is a tricky
-	 * one!
-	 */
-	private float[] vector2ArrayToFloatArray(Array<Vector2> dots){
-		float[] floatDots = new float[dots.size * 2];
-		int i = 0;
-		for (Vector2 dot : dots){
-			floatDots[i++] = dot.x;
-			floatDots[i++] = dot.y;
-		}
-		return floatDots;
+		shapeRenderer = new ShapeRenderer();
 	}
 
 	@Override
@@ -55,7 +38,7 @@ public class AvatarGame extends ApplicationAdapter {
 		// Make the background black
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
+/*
 		// Draw the dots
 		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 		for (Vector2 dot : dots){
@@ -71,16 +54,14 @@ public class AvatarGame extends ApplicationAdapter {
 			i++;
 		}
 		spriteBatch.end();
+*/
 
-		// TODO: Start a batch with Shapetype.Line
-		shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
-		// TODO: Draw a polyline using the dot positions as a float array
-		if (floatDots.length > 3) {
-			shapeRenderer.polyline(floatDots);
-		}
+		shapeRenderer.setColor(Color.WHITE);
+		shapeRenderer.rect(10,20,500,500,Color.BLUE,Color.RED,Color.YELLOW,Color.GREEN);
 
-		// TODO: End the batch
+
 		shapeRenderer.end();
 }
 }
