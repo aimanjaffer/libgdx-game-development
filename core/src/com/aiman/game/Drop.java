@@ -78,11 +78,14 @@ public class Drop extends ApplicationAdapter {
         }
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) bucket.x -= 300 * Gdx.graphics.getDeltaTime();
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) bucket.x += 300 * Gdx.graphics.getDeltaTime();
-
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)) bucket.y += 100 * Gdx.graphics.getDeltaTime();
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) bucket.y -= 100 * Gdx.graphics.getDeltaTime();
+        if (bucket.y > 400) bucket.y = 20;
+        if(bucket.y <0) bucket.y = 0;
         if (bucket.x < 0) bucket.x = 0;
         if (bucket.x > 800 - 64) bucket.x = 800 - 64;
 
-        if(TimeUtils.nanoTime() - lastDropTime > 1000000000)
+        if(TimeUtils.nanoTime() - lastDropTime > 800000000)
             spawnRainDrop();
         for(Iterator<Rectangle> iter = raindrops.iterator();iter.hasNext();){
             Rectangle raindrop = iter.next();
@@ -104,6 +107,9 @@ public class Drop extends ApplicationAdapter {
         raindrop.height =64;
         raindrops.add(raindrop);
         lastDropTime = TimeUtils.nanoTime();
+    }
+    private void jumpBucket(Rectangle bucket){
+
     }
 
     @Override
