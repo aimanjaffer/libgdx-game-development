@@ -2,8 +2,10 @@ package com.aiman.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -13,70 +15,72 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import java.util.Random;
 
 public class AvatarGame extends ApplicationAdapter {
-	/*
-	SpriteBatch batch;
-	Texture img;
-	ScreenViewport viewport;
-	public static float PPM = 16;
-	 */
+	private static final float DOT_RADIUS = 3.0f;
+	private SpriteBatch spriteBatch;
+	private BitmapFont bitmapFont;
+	private final Array<Vector2> dots = Dots.dots();
+	private float[] floatDots;
 	private ShapeRenderer shapeRenderer;
-	Array<Vector2> stars;
-	public static final String tag = "AvatarGame";
-	public static final float STAR_DENSITY = 0.01f;
+
+
 	@Override
 	public void create () {
-		Gdx.app.log(tag,"Entered create method");
+		spriteBatch = new SpriteBatch();
+		bitmapFont = new BitmapFont();
+		floatDots = vector2ArrayToFloatArray(dots);
 		shapeRenderer = new ShapeRenderer();
-		initStars(STAR_DENSITY);
-		/*
-		viewport = new ScreenViewport();
-		viewport.setUnitsPerPixel(1/PPM);
-		viewport.update(Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
-		*/
+	}
 
-	}
-	public void initStars(float density){
-		int screenWidth = Gdx.graphics.getWidth();
-		int screenHeight = Gdx.graphics.getHeight();
-		int starCount = (int) (screenHeight * screenWidth * density);
-		stars = new Array<Vector2>(starCount);
-		Random random = new Random();
-		for(int i=0;i<starCount;i++){
-			int x = random.nextInt(screenWidth);
-			int y = random.nextInt(screenHeight);
-			stars.add(new Vector2(x,y));
+	/**
+	 * TODO: Complete this function to translate Array<Vector2> to float[]
+	 *
+	 * The first problem is that the dot positions we have to work with are in an array of vectors,
+	 * and polyLine wants a flat array of floats. We've set up the array of floats for you, now all
+	 * you need to do is iterate over the Array of vectors, and put the x and y components into the
+	 * float array. Remember to check out the solution directory if you need help. This is a tricky
+	 * one!
+	 */
+	private float[] vector2ArrayToFloatArray(Array<Vector2> dots){
+		float[] floatDots = new float[dots.size * 2];
+		int i = 0;
+		for (Vector2 dot : dots){
+			floatDots[i++] = dot.x;
+			floatDots[i++] = dot.y;
 		}
+		return floatDots;
 	}
+
 	@Override
 	public void render () {
-		//Gdx.app.log(tag,"Entered render method");
-		Gdx.gl.glClearColor(0,0,0, 1);
+		// Make the background black
+		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-		shapeRenderer.line(0,0,100,100);
-		/*
-		for(Vector2 star : stars){
-			shapeRenderer.point(star.x,star.y,0);
+
+		// Draw the dots
+		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+		for (Vector2 dot : dots){
+			shapeRenderer.circle(dot.x, dot.y, DOT_RADIUS);
 		}
-		*/
 		shapeRenderer.end();
-		/*
-		batch.setProjectionMatrix(viewport.getCamera().combined);
-		batch.begin();
-		batch.draw(img, 0, 0, img.getWidth()/PPM,img.getHeight()/PPM);
-		batch.end();
-		 */
-	}
-	
-	@Override
-	public void dispose () {
-		Gdx.app.log(tag,"Entered dispose method");
-		/*
-		batch.dispose();
-		img.dispose();
-		*/
-		shapeRenderer.dispose();
-	}
+
+		// Draw the numbers
+		spriteBatch.begin();
+		Integer i = 1;
+		for (Vector2 dot : dots){
+			bitmapFont.draw(spriteBatch,i.toString(),dot.x+DOT_RADIUS, dot.y-DOT_RADIUS);
+			i++;
+		}
+		spriteBatch.end();
+
+		// TODO: Start a batch with Shapetype.Line
+		shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+
+		// TODO: Draw a polyline using the dot positions as a float array
+		if (floatDots.length > 3) {
+			shapeRenderer.polyline(floatDots);
+		}
+
+		// TODO: End the batch
+		shapeRenderer.end();
+}
 }
