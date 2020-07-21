@@ -54,10 +54,13 @@ public class AvatarGame extends ApplicationAdapter {
 		//Gdx.app.log(tag,"Entered render method");
 		Gdx.gl.glClearColor(0,0,0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		shapeRenderer.begin(ShapeRenderer.ShapeType.Point);
+		shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+		shapeRenderer.line(0,0,100,100);
+		/*
 		for(Vector2 star : stars){
 			shapeRenderer.point(star.x,star.y,0);
 		}
+		*/
 		shapeRenderer.end();
 		/*
 		batch.setProjectionMatrix(viewport.getCamera().combined);
