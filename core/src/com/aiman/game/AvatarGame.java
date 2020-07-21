@@ -15,29 +15,29 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import java.util.Random;
 
 public class AvatarGame extends ApplicationAdapter {
-	//private static final float DOT_RADIUS = 3.0f;
-	//private SpriteBatch spriteBatch;
-	//private BitmapFont bitmapFont;
-	//private final Array<Vector2> dots = Dots.dots();
-	//private float[] floatDots;
-	private ShapeRenderer shapeRenderer;
+    //private static final float DOT_RADIUS = 3.0f;
+    //private SpriteBatch spriteBatch;
+    //private BitmapFont bitmapFont;
+    //private final Array<Vector2> dots = Dots.dots();
+    //private float[] floatDots;
+    private ShapeRenderer shapeRenderer;
 
 
-	@Override
-	public void create () {
+    @Override
+    public void create () {
 		/*
 		spriteBatch = new SpriteBatch();
 		bitmapFont = new BitmapFont();
 		 */
 
-		shapeRenderer = new ShapeRenderer();
-	}
+        shapeRenderer = new ShapeRenderer();
+    }
 
-	@Override
-	public void render () {
-		// Make the background black
-		Gdx.gl.glClearColor(0, 0, 0, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    @Override
+    public void render () {
+        // Make the background black
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 /*
 		// Draw the dots
 		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -56,12 +56,14 @@ public class AvatarGame extends ApplicationAdapter {
 		spriteBatch.end();
 */
 
-		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
-		shapeRenderer.setColor(Color.WHITE);
-		shapeRenderer.rect(10,20,500,500,Color.BLUE,Color.RED,Color.YELLOW,Color.GREEN);
-
-
-		shapeRenderer.end();
-}
+        shapeRenderer.setColor(Color.WHITE);
+        shapeRenderer.rect(10,20,500,500,Color.BLUE,Color.RED,Color.YELLOW,Color.GREEN);
+        shapeRenderer.rectLine(20,30,40,50,10);
+        // Two overlapping objects. The one drawn later is placed on top of the ones drawn earlier
+        shapeRenderer.setColor(Color.GOLD);
+        shapeRenderer.circle(100,200,60);
+        shapeRenderer.end();
+    }
 }
