@@ -4,17 +4,24 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+
 public class BasketBallGame extends ApplicationAdapter {
     SpriteBatch batch;
     Texture background;
     Texture ballTexture;
     Ball ball;
-    //private Music backgroundMusic;
+    OrthographicCamera camera;
+
     @Override
     public void create () {
+        camera = new OrthographicCamera();
+        camera.setToOrtho(false,800,400);
+
         batch = new SpriteBatch();
         background = new Texture("background.jpg");
 
@@ -22,14 +29,14 @@ public class BasketBallGame extends ApplicationAdapter {
         ballTexture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
 
         ball = new Ball();
-        //backgroundMusic = Gdx.audio.newMusic(Gdx.files.internal("basketball.mp3"));
-        //backgroundMusic.setLooping(true);
-        //backgroundMusic.play();
     }
 
     @Override
     public void render () {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT); // don't forget to clear screen
+
+        camera.update();
+        batch.setProjectionMatrix(camera.combined);
 
         if (Gdx.input.isKeyPressed(Input.Keys.UP))
             ball.velocity.y += 10;
@@ -53,5 +60,18 @@ public class BasketBallGame extends ApplicationAdapter {
         batch.dispose();
         background.dispose();
         ballTexture.dispose();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+
+        // TODO: Calculate the aspect ratio (width / height)
+        float aspectRatio = 1.0f * width / height;
+
+        // TODO: Set the camera's viewport height taking into account the ball's movement and radius
+        camera.viewportHeight = height;
+
+        // TODO: Set the camera's viewport width to maintain the aspect ratio
+        camera.viewportWidth = aspectRatio * camera.viewportHeight;
     }
 }
